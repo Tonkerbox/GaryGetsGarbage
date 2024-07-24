@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkuhekwhsovlw"]
+
+[ext_resource type="Script" path="res://WorldStuff/ground_col_handler.gd" id="1_vxtee"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b81nu"]
+
+[node name="GroundColHandler" type="Node3D"]
+script = ExtResource("1_vxtee")
+colSize = null
+
+[node name="colBody" type="StaticBody3D" parent="."]
+collision_mask = 255
+
+[node name="col" type="CollisionShape3D" parent="colBody"]
+shape = SubResource("ConcavePolygonShape3D_b81nu")

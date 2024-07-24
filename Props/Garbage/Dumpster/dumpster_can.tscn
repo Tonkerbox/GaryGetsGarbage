@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://itl2v0mem7wn"]
+
+[ext_resource type="Script" path="res://Props/Garbage/Dumpster/dumpster_can.gd" id="1_mjof5"]
+[ext_resource type="PackedScene" uid="uid://pjlpovxfx68i" path="res://WorldStuff/Collisionstuff/moving_col.tscn" id="1_t8u1u"]
+[ext_resource type="PackedScene" uid="uid://cbfw0wdlg6sqb" path="res://Props/Garbage/Food/cerealBox/cerealbox.tscn" id="2_dtkjv"]
+[ext_resource type="ArrayMesh" uid="uid://bwobse0cshgx7" path="res://Props/Garbage/Dumpster/meshsAndText/baseDumpMesh.res" id="4_86eps"]
+[ext_resource type="ArrayMesh" uid="uid://1x6a6yoqo5u6" path="res://Props/Garbage/Dumpster/meshsAndText/dumpLidMesh.res" id="5_vsp6y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ih7vv"]
+size = Vector3(2.51344, 0.0821533, 1.61597)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3f17x"]
+size = Vector3(2.38501, 1.33838, 0.0661621)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tosrc"]
+size = Vector3(2.36316, 1.71152, 0.0661621)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vybh3"]
+size = Vector3(2.41933, 0.118286, 1.58534)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0mspl"]
+size = Vector3(0.0801392, 1.30612, 1.45877)
+
+[node name="DumpsterCan" type="RigidBody3D" groups=["grabbable"]]
+collision_layer = 2
+collision_mask = 31
+script = ExtResource("1_mjof5")
+trash = Array[PackedScene]([ExtResource("2_dtkjv")])
+trashSpawnPosY = 0.5
+trashSpawnArea = Vector2(0.5, 0.25)
+rotationTreshold = 80.0
+trashSpawnFrames = 20
+
+[node name="MovingCol" parent="." instance=ExtResource("1_t8u1u")]
+colSize = 8
+onstart = true
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
+mesh = ExtResource("4_86eps")
+
+[node name="lid" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45255, -0.0160543)
+collision_layer = 0
+collision_mask = 0
+
+[node name="lidCol" type="CollisionShape3D" parent="lid"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.00380373, 0.0213598, 0.0319485)
+shape = SubResource("BoxShape3D_ih7vv")
+
+[node name="Lid" type="MeshInstance3D" parent="lid"]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0.439245, 0)
+mesh = ExtResource("5_vsp6y")
+skeleton = NodePath("../..")
+
+[node name="lidJoint" type="JoltHingeJoint3D" parent="."]
+limit_enabled = true
+limit_upper = 0.191986
+limit_lower = -3.14159
+node_a = NodePath("..")
+node_b = NodePath("../lid")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.43336, 0.816088)
+
+[node name="frontCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0213734, 0.434342, -0.782674)
+shape = SubResource("BoxShape3D_3f17x")
+
+[node name="backCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013244, 0.571314, 0.765082)
+shape = SubResource("BoxShape3D_tosrc")
+
+[node name="bottomCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00984955, -0.196308, -0.00484407)
+shape = SubResource("BoxShape3D_vybh3")
+
+[node name="rightCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2094, 0.453049, 0.00358602)
+shape = SubResource("BoxShape3D_0mspl")
+
+[node name="leftCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20657, 0.452182, 0.0171509)
+shape = SubResource("BoxShape3D_0mspl")

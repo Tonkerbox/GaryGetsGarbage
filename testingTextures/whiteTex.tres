@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://djoj0l7shkwtt"]
+
+[ext_resource type="Texture2D" uid="uid://chtxbsr72rp1e" path="res://testingTextures/textureWhite.png" id="1_hdysn"]
+[ext_resource type="Material" uid="uid://d07tx51b6b0jf" path="res://testingTextures/reedTex.tres" id="1_w0ldi"]
+
+[resource]
+next_pass = ExtResource("1_w0ldi")
+albedo_texture = ExtResource("1_hdysn")
+albedo_texture_force_srgb = true
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_triplanar = true
+uv2_world_triplanar = true

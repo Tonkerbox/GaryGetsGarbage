@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://1mm30m7gehay"]
+
+[ext_resource type="ArrayMesh" uid="uid://dixmlk78ihesm" path="res://Garbage Truck/Meshs/GT_bed.res" id="1_a7hnr"]
+[ext_resource type="Script" path="res://Garbage Truck/Main/GarbageTruck.gd" id="1_aws4y"]
+[ext_resource type="ArrayMesh" uid="uid://dqfcydo3sb2gt" path="res://Garbage Truck/Meshs/GT_cab.res" id="2_yftok"]
+[ext_resource type="PackedScene" uid="uid://cjwn0a7a8nucl" path="res://Garbage Truck/Main/wheel.tscn" id="4_6rl4h"]
+[ext_resource type="Script" path="res://Garbage Truck/Main/CamPivot.gd" id="4_lfxow"]
+[ext_resource type="PackedScene" uid="uid://b3ggmkumgvl0i" path="res://WorldStuff/Collisionstuff/groundColObject.tscn" id="6_hi88y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggp15"]
+size = Vector3(2.5, 0.75, 4.1875)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b15h8"]
+points = PackedVector3Array(1.25, 1.9375, 0.0623716, 0.437304, 0.312402, 0.125, 1.25, 0.0624021, 0.0623716, 1.25, 1.9375, -1.6875, -1.25, 1.9375, 0.0623716, 0.437304, -4.89429e-05, 0.125, -0.437549, 0.312402, 0.125, 1.25, -4.89429e-05, -7.95126e-05, 1.25, 0.624853, -1.6875, -1.25, 1.9375, -1.6875, -1.25, 0.0624021, 0.0623716, 1.25, -0.0625, -0.125159, -0.437549, -4.89429e-05, 0.125, 1.25, -0.0625, -1.00001, -1.25, 0.624853, -1.6875, -1.25, -4.89429e-05, -7.95126e-05, -1.25, -0.0625, -0.125159, -1.25, -0.0625, -1.00001)
+
+[node name="GarbageTruck" type="RigidBody3D" node_paths=PackedStringArray("steeringWheels", "drivingWheels")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56997, 0)
+collision_layer = 2
+collision_mask = 13
+mass = 20.0
+gravity_scale = 1.8
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.4, 0)
+script = ExtResource("1_aws4y")
+power = 85.0
+powerband = 200.0
+maxSpeed = 50.0
+restDist = 1.0
+strength = 800.0
+damping = 150.0
+slidingFrictionBack = 80.0
+slidingFrictionFront = 60.0
+brakeForce = 40.0
+constantBrakeForce = 60.0
+steeringWheels = [NodePath("Wheels/Wheel"), NodePath("Wheels/Wheel3")]
+drivingWheels = [NodePath("Wheels/Wheel2"), NodePath("Wheels/Wheel4")]
+steeringSpeed = 15.0
+steeringAngle = 35.0
+
+[node name="GroundObject" parent="." node_paths=PackedStringArray("object") instance=ExtResource("6_hi88y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.56997, -1)
+colSize = 32
+object = NodePath("..")
+forTruck = true
+
+[node name="GtBed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5625)
+mesh = ExtResource("1_a7hnr")
+skeleton = NodePath("../..")
+
+[node name="bedCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -0.03125)
+shape = SubResource("BoxShape3D_ggp15")
+
+[node name="GtCab" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 3.25)
+mesh = ExtResource("2_yftok")
+skeleton = NodePath("../..")
+
+[node name="cabCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 3.25)
+shape = SubResource("ConvexPolygonShape3D_b15h8")
+
+[node name="CamPivot(handler)" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17313, 1)
+script = ExtResource("4_lfxow")
+strength = 7.5
+
+[node name="CamMount" type="Node3D" parent="CamPivot(handler)"]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 1.8875, -6)
+
+[node name="Cam" type="Camera3D" parent="CamPivot(handler)"]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 1.8875, -6)
+
+[node name="Wheels" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.113593, 0)
+
+[node name="Wheel" parent="Wheels" instance=ExtResource("4_6rl4h")]
+transform = Transform3D(1, 8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 0, -8.74228e-08, -7.64274e-15, -1, -1.043, 0.128849, 1.4)
+
+[node name="Wheel2" parent="Wheels" instance=ExtResource("4_6rl4h")]
+transform = Transform3D(1, -1.50996e-07, -8.74228e-08, -1.50996e-07, -1, 0, -8.74228e-08, 1.32005e-14, -1, -1.043, 0.128849, -1.4)
+
+[node name="Wheel3" parent="Wheels" instance=ExtResource("4_6rl4h")]
+transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 1.01964, 0.128849, 1.4)
+
+[node name="Wheel4" parent="Wheels" instance=ExtResource("4_6rl4h")]
+transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 1.01964, 0.128849, -1.4)

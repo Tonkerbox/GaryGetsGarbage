@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://pjlpovxfx68i"]
+
+[ext_resource type="Script" path="res://Garbage Truck/Main/MovingCol.gd" id="1_p5eg7"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i3g1l"]
+resource_local_to_scene = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7dn5e"]
+resource_local_to_scene = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dno17"]
+resource_local_to_scene = true
+
+[node name="MovingCol" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.76508)
+script = ExtResource("1_p5eg7")
+colSize = 64
+
+[node name="colBody" type="StaticBody3D" parent="."]
+collision_mask = 10
+
+[node name="col" type="CollisionShape3D" parent="colBody"]
+shape = SubResource("ConcavePolygonShape3D_i3g1l")
+
+[node name="colBody2" type="StaticBody3D" parent="."]
+collision_mask = 10
+
+[node name="col" type="CollisionShape3D" parent="colBody2"]
+shape = SubResource("ConcavePolygonShape3D_7dn5e")
+
+[node name="plane" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_dno17")

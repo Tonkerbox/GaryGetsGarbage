@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0r1hlblelx4"]
+
+[ext_resource type="PackedScene" uid="uid://pjlpovxfx68i" path="res://WorldStuff/Collisionstuff/moving_col.tscn" id="1_7q1ha"]
+[ext_resource type="ArrayMesh" uid="uid://deret8jkqoywl" path="res://Props/Barrel/barrel.res" id="1_23arx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mym5e"]
+resource_local_to_scene = true
+points = PackedVector3Array(0.947839, 1.62512, 0.36576, -1.00796, -1.03835, -0.216371, -1.01255, -1.04446, 0.200932, 0.995077, -1.04277, -0.258892, -0.300207, 1.63001, -0.967745, -0.216653, 1.62976, 0.993118, 0.407313, -1.03472, 0.947269, -1.01079, 1.63172, 0.0751317, -0.216371, -1.03835, -1.00796, 0.664813, 1.64075, -0.765198, -0.625909, -1.0234, 0.815456, 0.365396, -1.03353, -0.962802, -0.831324, 1.61217, -0.584318, 0.947354, -1.03484, 0.407154, 0.532059, 1.62482, 0.864433, -0.839815, 1.62576, 0.573869, -0.707283, -1.02174, -0.74865, 0.993118, 1.62976, -0.216652, 0.075521, 1.63166, -1.01075, -0.258892, -1.04277, 0.995077, 0.815529, -1.02321, -0.625819, 0.240403, 1.62014, 0.985906, 0.860052, -1.02824, 0.57041, -0.682597, 1.64393, 0.750588, -0.880705, -1.03504, 0.531789, -0.584318, 1.61217, -0.831324, 0.85801, 1.61473, -0.544159, -0.9678, 1.63008, -0.300028, 0.988048, -1.0334, 0.282087, -0.874153, -1.02505, -0.544126, 0.775734, 1.61521, 0.651849, -0.384584, 0.8804, 0.954053)
+
+[node name="barrel" type="RigidBody3D"]
+collision_layer = 27
+collision_mask = 27
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.3, 0)
+
+[node name="MovingCol" parent="." instance=ExtResource("1_7q1ha")]
+colSize = 8
+
+[node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("1_23arx")
+
+[node name="col" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mym5e")

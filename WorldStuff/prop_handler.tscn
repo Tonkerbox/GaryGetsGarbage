@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://c27t6qij5jroc"]
+
+[ext_resource type="Script" path="res://Garbage Truck/Main/propHandler.gd" id="1_tyrv7"]
+[ext_resource type="PackedScene" uid="uid://bbjjgtl6tbkpu" path="res://Props/Trees/cactus/cactus.tscn" id="2_tqhhk"]
+[ext_resource type="PackedScene" uid="uid://cyulgxyrac8do" path="res://Props/Trees/deadTree/dead_tree_basic.tscn" id="3_v5ubp"]
+[ext_resource type="PackedScene" uid="uid://b0r1hlblelx4" path="res://Props/Barrel/barrel.tscn" id="4_mr1vj"]
+
+[node name="propHandler" type="Node"]
+script = ExtResource("1_tyrv7")
+chunkSize = 50
+chunkGrid = 2
+trees = Array[PackedScene]([ExtResource("2_tqhhk"), ExtResource("3_v5ubp")])
+physicsObjects = Array[PackedScene]([ExtResource("4_mr1vj")])

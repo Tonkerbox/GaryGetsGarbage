@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://dv4abc3u84v4w"]
+
+[ext_resource type="Texture2D" uid="uid://dd215kxkj0hy3" path="res://WorldStuff/tex_baseSand.png" id="2_7qyph"]
+[ext_resource type="Script" path="res://WorldStuff/TerrainHandler.gd" id="2_e88kr"]
+[ext_resource type="Shader" path="res://WorldStuff/Shaders/groundClipShader.gdshader" id="2_solco"]
+[ext_resource type="PackedScene" uid="uid://1mm30m7gehay" path="res://Garbage Truck/Main/garbage_truck.tscn" id="3_dewfc"]
+[ext_resource type="Texture2D" uid="uid://ctuc55fc2kkhh" path="res://WorldStuff/tex_blackSand.png" id="3_qycip"]
+[ext_resource type="Texture2D" uid="uid://t6frmql43e32" path="res://WorldStuff/tex_sandRock.png" id="3_rptjj"]
+[ext_resource type="Script" path="res://WorldStuff/PropHandler.gd" id="7_qk5f0"]
+[ext_resource type="PackedScene" uid="uid://cyulgxyrac8do" path="res://Props/Trees/deadTree/dead_tree_basic.tscn" id="8_grvlq"]
+[ext_resource type="PackedScene" uid="uid://bbjjgtl6tbkpu" path="res://Props/Trees/cactus/cactus.tscn" id="9_gkun3"]
+[ext_resource type="PackedScene" uid="uid://itl2v0mem7wn" path="res://Props/Garbage/Dumpster/dumpster_can.tscn" id="10_6s367"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_is7iy"]
+sun_angle_max = 202.22
+
+[sub_resource type="Sky" id="Sky_y0jvw"]
+sky_material = SubResource("ProceduralSkyMaterial_is7iy")
+
+[sub_resource type="Environment" id="Environment_1bmr1"]
+background_mode = 2
+sky = SubResource("Sky_y0jvw")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.0
+reflected_light_source = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+ssil_radius = 4.64
+fog_light_color = Color(0.782193, 0.830302, 0.865124, 1)
+fog_sun_scatter = 1.0
+fog_density = 0.0067
+fog_sky_affect = 0.142
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.879781, 0.977408, 1, 1)
+volumetric_fog_emission = Color(1, 0.936881, 0.810357, 1)
+volumetric_fog_anisotropy = -0.45
+volumetric_fog_length = 1024.0
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_temporal_reprojection_enabled = false
+adjustment_brightness = 1.36
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sdvc8"]
+noise_type = 3
+frequency = 0.0451
+fractal_octaves = 1
+fractal_lacunarity = 128.625
+fractal_weighted_strength = 1.0
+cellular_distance_function = 1
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 3.245
+domain_warp_frequency = 5.59
+domain_warp_fractal_type = 2
+domain_warp_fractal_octaves = 8
+domain_warp_fractal_gain = -32.99
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cip7k"]
+invert = true
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_sdvc8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3iqq1"]
+frequency = 0.019
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v2q22"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_3iqq1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_inumf"]
+render_priority = 0
+shader = ExtResource("2_solco")
+shader_parameter/scale = Vector2(256, 256)
+shader_parameter/baseTex = ExtResource("2_7qyph")
+shader_parameter/secondTex = ExtResource("3_rptjj")
+shader_parameter/thirdTex = ExtResource("3_qycip")
+shader_parameter/mixNoise = SubResource("NoiseTexture2D_cip7k")
+shader_parameter/secondMixNoise = SubResource("NoiseTexture2D_v2q22")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pryx0"]
+material = SubResource("ShaderMaterial_inumf")
+size = Vector2(2056, 2056)
+subdivide_width = 2055
+subdivide_depth = 2055
+
+[node name="ProcWorldTest" type="Node3D"]
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+light_color = Color(0.915977, 0.932707, 0.848452, 1)
+light_energy = 2.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bmr1")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0748, 0, -38.2729)
+mesh = SubResource("PlaneMesh_pryx0")
+
+[node name="GarbageTruck" parent="." instance=ExtResource("3_dewfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.4008, 0)
+mass = 40.0
+power = 120.0
+
+[node name="TerrainHandler" type="Node" parent="." node_paths=PackedStringArray("clipmap", "player")]
+script = ExtResource("2_e88kr")
+clipmap = NodePath("../Ground")
+player = NodePath("../GarbageTruck")
+
+[node name="PropHandler" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("7_qk5f0")
+chunkSize = 250
+trees = Array[PackedScene]([ExtResource("8_grvlq"), ExtResource("9_gkun3")])
+player = NodePath("../GarbageTruck")
+treeFreq = Vector2i(30, 40)
+
+[node name="DumpsterCan" parent="." instance=ExtResource("10_6s367")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.3758, 6.36553)

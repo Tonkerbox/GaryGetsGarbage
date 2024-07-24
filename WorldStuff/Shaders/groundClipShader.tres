@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dklhr7c8o1hmd"]
+
+[ext_resource type="Shader" path="res://WorldStuff/Shaders/groundClipShader.gdshader" id="1_jd36r"]
+[ext_resource type="Texture2D" uid="uid://dcgrj6kpolx14" path="res://WorldStuff/sandTex.png" id="2_81vvp"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jd36r")
+shader_parameter/scale = Vector2(100, 100)
+shader_parameter/groundTex = ExtResource("2_81vvp")

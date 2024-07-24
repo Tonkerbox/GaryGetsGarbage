@@ -1,0 +1,116 @@
+[gd_scene load_steps=17 format=3 uid="uid://dv4abc3u84v4w"]
+
+[ext_resource type="Texture2D" uid="uid://dd215kxkj0hy3" path="res://WorldStuff/tex_baseSand.png" id="2_7qyph"]
+[ext_resource type="Script" path="res://WorldStuff/TerrainHandler.gd" id="2_e88kr"]
+[ext_resource type="Shader" path="res://WorldStuff/Shaders/groundClipShader.gdshader" id="2_solco"]
+[ext_resource type="PackedScene" uid="uid://1mm30m7gehay" path="res://Garbage Truck/Main/garbage_truck.tscn" id="3_dewfc"]
+[ext_resource type="Texture2D" uid="uid://ctuc55fc2kkhh" path="res://WorldStuff/tex_blackSand.png" id="3_qycip"]
+[ext_resource type="Texture2D" uid="uid://t6frmql43e32" path="res://WorldStuff/tex_sandRock.png" id="3_rptjj"]
+[ext_resource type="PackedScene" uid="uid://b0r1hlblelx4" path="res://Props/Barrel/barrel.tscn" id="7_kxn31"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_h24ro"]
+rayleigh_coefficient = 0.0
+mie_coefficient = 0.008
+turbidity = 330.87
+sun_disk_scale = 68.41
+ground_color = Color(1, 1, 1, 1)
+energy_multiplier = 3.0
+
+[sub_resource type="Sky" id="Sky_hhbje"]
+sky_material = SubResource("PhysicalSkyMaterial_h24ro")
+
+[sub_resource type="Environment" id="Environment_1bmr1"]
+background_mode = 2
+sky = SubResource("Sky_hhbje")
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.298899, 0.218884, 0.156, 1)
+fog_light_energy = 4.01
+fog_sun_scatter = 1.0
+fog_density = 0.007
+volumetric_fog_emission = Color(0.279968, 0.225137, 0.130526, 1)
+adjustment_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sdvc8"]
+noise_type = 3
+frequency = 0.0451
+fractal_octaves = 1
+fractal_lacunarity = 128.625
+fractal_weighted_strength = 1.0
+cellular_distance_function = 1
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 3.245
+domain_warp_frequency = 5.59
+domain_warp_fractal_type = 2
+domain_warp_fractal_octaves = 8
+domain_warp_fractal_gain = -32.99
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cip7k"]
+invert = true
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_sdvc8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3iqq1"]
+frequency = 0.019
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v2q22"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_3iqq1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_inumf"]
+render_priority = 0
+shader = ExtResource("2_solco")
+shader_parameter/scale = Vector2(256, 256)
+shader_parameter/baseTex = ExtResource("2_7qyph")
+shader_parameter/secondTex = ExtResource("3_rptjj")
+shader_parameter/thirdTex = ExtResource("3_qycip")
+shader_parameter/mixNoise = SubResource("NoiseTexture2D_cip7k")
+shader_parameter/secondMixNoise = SubResource("NoiseTexture2D_v2q22")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pryx0"]
+material = SubResource("ShaderMaterial_inumf")
+size = Vector2(1028, 1028)
+subdivide_width = 1027
+subdivide_depth = 1027
+
+[node name="ProcWorldTest" type="Node3D"]
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+light_color = Color(0.685974, 0.552349, 0.366495, 1)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.0
+directional_shadow_mode = 0
+sky_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bmr1")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0748, 0, -38.2729)
+mesh = SubResource("PlaneMesh_pryx0")
+
+[node name="GarbageTruck" parent="." instance=ExtResource("3_dewfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.4008, 0)
+mass = 40.0
+power = 120.0
+
+[node name="Barrel" parent="." instance=ExtResource("7_kxn31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2496, 16.1963, -7.01665)
+
+[node name="Barrel2" parent="." instance=ExtResource("7_kxn31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.7797, 18.8648, 15.2787)
+
+[node name="Barrel3" parent="." instance=ExtResource("7_kxn31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.1515, 16.1963, 27.7221)
+
+[node name="Barrel4" parent="." instance=ExtResource("7_kxn31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.58232, 16.1963, 27.7221)
+
+[node name="TerrainHandler" type="Node" parent="." node_paths=PackedStringArray("clipmap", "player")]
+script = ExtResource("2_e88kr")
+clipmap = NodePath("../Ground")
+player = NodePath("../GarbageTruck")

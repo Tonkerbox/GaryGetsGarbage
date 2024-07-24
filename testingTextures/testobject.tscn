@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://hyg5q3mrgbjc"]
+
+[ext_resource type="Material" uid="uid://bthcb2hnxej3u" path="res://testingTextures/purpleTex.tres" id="1_r0fqk"]
+[ext_resource type="PackedScene" uid="uid://b3ggmkumgvl0i" path="res://WorldStuff/depricatedButIdontwatntodeletete/groundColObject.tscn" id="2_jnl2h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lkyhi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t37wd"]
+
+[node name="testobject" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9714, 17.9196, -19.696)
+collision_layer = 8
+collision_mask = 27
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lkyhi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_r0fqk")
+mesh = SubResource("BoxMesh_t37wd")
+
+[node name="GroundObject" parent="." node_paths=PackedStringArray("object") instance=ExtResource("2_jnl2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9714, -17.9196, 20.696)
+colSize = 4
+object = NodePath("..")
