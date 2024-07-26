@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cue0rbwuppd1j"]
+
+[ext_resource type="Script" path="res://Garbage Truck/GrabberStuff/GrabberAparatus.gd" id="1_oucaj"]
+[ext_resource type="ArrayMesh" uid="uid://vwuchkvqp7pd" path="res://Garbage Truck/GrabberStuff/meshs/arm.res" id="2_mgof7"]
+[ext_resource type="ArrayMesh" uid="uid://ci25of4jld4ss" path="res://Garbage Truck/GrabberStuff/meshs/tongsMesh.res" id="3_wvcef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_muf3o"]
+resource_local_to_scene = true
+size = Vector3(0.31543, 0.0544128, 0.367073)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c4478"]
+size = Vector3(0.31543, 0.0544128, 0.391365)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hyx0k"]
+size = Vector3(3.3866, 0.199829, 0.624329)
+
+[node name="arm" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04804, 1.57177)
+collision_layer = 2
+collision_mask = 41
+center_of_mass_mode = 1
+script = ExtResource("1_oucaj")
+armSpeed = 1.0
+tongRestPos = Vector3(0, -0.969104, 2.17188)
+tongDeployPos = Vector3(0, -0.969104, 2.71951)
+tongDeploySpeed = 0.1
+trashDumpSpeed = 0.33
+
+[node name="ArmMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.968722, 1.63199)
+mesh = ExtResource("2_mgof7")
+skeleton = NodePath("../..")
+
+[node name="TongJoint" type="JoltGeneric6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01244, 2.95305)
+
+[node name="tongHandler" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.969104, 2.17188)
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="TongsMesh" type="MeshInstance3D" parent="tongHandler"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, -0.472817)
+mesh = ExtResource("3_wvcef")
+skeleton = NodePath("../../..")
+
+[node name="leftCol" type="CollisionShape3D" parent="tongHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.699934, -0.0580292, 0.049376)
+shape = SubResource("BoxShape3D_muf3o")
+
+[node name="rightCol" type="CollisionShape3D" parent="tongHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.058, 0.0594316)
+shape = SubResource("BoxShape3D_c4478")
+
+[node name="FrontCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00189209, -1.02435, 2.28585)
+shape = SubResource("BoxShape3D_hyx0k")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="tongHandler" to="." method="_on_tong_handler_body_entered"]
+[connection signal="body_exited" from="tongHandler" to="." method="_on_tong_handler_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -18,5 +18,5 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.52069e-09, -0.436851, 2.41318e-16)
 
 [node name="Wheel" type="MeshInstance3D" parent="Wheelholder/whellHolderHolder"]
-transform = Transform3D(4.2881e-21, 1.96701e-08, -0.45, 0.45, -1.96701e-08, -8.59804e-16, -1.96701e-08, -0.45, -1.96701e-08, -0.00593567, -0.00491226, -0.440508)
+transform = Transform3D(0, 1.96701e-08, -0.45, 0.45, -1.96701e-08, 0, -1.96701e-08, -0.45, -1.96701e-08, -0.00593567, -0.00491226, -0.440508)
 mesh = ExtResource("2_xefr7")

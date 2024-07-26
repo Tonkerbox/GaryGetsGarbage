@@ -22,27 +22,37 @@ size = Vector3(2.41933, 0.118286, 1.58534)
 size = Vector3(0.0801392, 1.30612, 1.45877)
 
 [node name="DumpsterCan" type="RigidBody3D" groups=["grabbable"]]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 31
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.01, 0)
 script = ExtResource("1_mjof5")
-trash = Array[PackedScene]([ExtResource("2_dtkjv")])
+trashArr = Array[PackedScene]([ExtResource("2_dtkjv")])
 trashSpawnPosY = 0.5
-trashSpawnArea = Vector2(0.5, 0.25)
-rotationTreshold = 80.0
-trashSpawnFrames = 20
+trashSpawnArea = Vector2(0.25, 0.25)
+capacity = 20.0
 
 [node name="MovingCol" parent="." instance=ExtResource("1_t8u1u")]
 colSize = 8
-onstart = true
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
 mesh = ExtResource("4_86eps")
 
+[node name="lidJoint" type="JoltHingeJoint3D" parent="."]
+limit_enabled = true
+limit_upper = 0.191986
+limit_lower = -3.14159
+node_a = NodePath("..")
+node_b = NodePath("../lid")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.44511, 0.816088)
+
 [node name="lid" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45255, -0.0160543)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4643, -0.0160543)
 collision_layer = 0
-collision_mask = 0
+collision_mask = 16
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, -0.3)
 
 [node name="lidCol" type="CollisionShape3D" parent="lid"]
 transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.00380373, 0.0213598, 0.0319485)
@@ -52,14 +62,6 @@ shape = SubResource("BoxShape3D_ih7vv")
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0.439245, 0)
 mesh = ExtResource("5_vsp6y")
 skeleton = NodePath("../..")
-
-[node name="lidJoint" type="JoltHingeJoint3D" parent="."]
-limit_enabled = true
-limit_upper = 0.191986
-limit_lower = -3.14159
-node_a = NodePath("..")
-node_b = NodePath("../lid")
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.43336, 0.816088)
 
 [node name="frontCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0213734, 0.434342, -0.782674)

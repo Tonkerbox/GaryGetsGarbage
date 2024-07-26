@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://csi37e5uftwr7"]
+[gd_scene load_steps=15 format=3 uid="uid://csi37e5uftwr7"]
 
 [ext_resource type="ArrayMesh" uid="uid://b64hsb6b45x1b" path="res://Garbage Truck/Dumpsterstuff/Meshs/dumpsterMesh.res" id="1_v21p7"]
 [ext_resource type="Script" path="res://Garbage Truck/Dumpsterstuff/dumpster.gd" id="1_vugvx"]
 [ext_resource type="ArrayMesh" uid="uid://cvrpolvauxxmj" path="res://Garbage Truck/Meshs/lidMesh.res" id="2_5p6oo"]
+[ext_resource type="ArrayMesh" uid="uid://ca6jnuwswp8md" path="res://Garbage Truck/Dumpsterstuff/Meshs/topperMesh.res" id="4_7r0qq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rdmlk"]
 size = Vector3(2.78595, 0.554199, 3.05902)
@@ -28,10 +29,21 @@ points = PackedVector3Array(2.45048, -0.538879, 2.89946, 2.11227, -0.816731, -2.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qwmsu"]
 points = PackedVector3Array(-2.51506, 2.07443, 2.81214, -2.25374, 2.16158, -2.67596, -2.08517, 1.86712, 2.82661, -2.42791, -0.626029, 2.89946, -2.51506, -0.451729, -2.67596, -2.08684, -0.835948, 2.80523, -2.51506, 2.16158, -2.67596, -2.07948, -0.364579, -2.67596, -2.07948, 2.16158, 2.37663, -2.51506, -0.451729, 2.89946, -2.08684, -0.835948, -2.58173, -2.42791, -0.626029, -2.67596, -2.51506, 2.16158, 2.72482, -2.51506, 1.90013, 2.89946, -2.08816, 2.10081, 2.62066)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qyg7c"]
+size = Vector3(2.7652, 0.356445, 3.01147)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8s1s5"]
+size = Vector3(2.76831, 1.59888, 0.235107)
+
 [node name="Dumpster" type="RigidBody3D"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 29
 script = ExtResource("1_vugvx")
+maxSpace = 50.0
+mintopperHeight = 1.121
+maxtopperHeight = 2.904
+topperScaleHeight = 1.388
+minTopperScaleHeight = 1.205
 
 [node name="mainJoint" type="JoltHingeJoint3D" parent="."]
 limit_enabled = true
@@ -52,7 +64,7 @@ shape = SubResource("BoxShape3D_rdmlk")
 [node name="Lid" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13863, -2.17105)
 collision_layer = 2
-collision_mask = 34
+collision_mask = 18
 
 [node name="LidMesh" type="MeshInstance3D" parent="Lid"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0.290233)
@@ -90,3 +102,24 @@ shape = SubResource("ConvexPolygonShape3D_62akp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.766, 0)
 shape = SubResource("ConvexPolygonShape3D_qwmsu")
+
+[node name="TopperMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1.20502, -0.197)
+mesh = ExtResource("4_7r0qq")
+
+[node name="TrashCol" type="Area3D" parent="."]
+collision_layer = 28
+collision_mask = 28
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrashCol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393158, -0.0730557)
+shape = SubResource("BoxShape3D_qyg7c")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="TrashCol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0020752, 1.23816, -1.47898)
+shape = SubResource("BoxShape3D_8s1s5")
+
+[node name="DumpTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="TrashCol" to="." method="_on_trash_col_body_entered"]
+[connection signal="timeout" from="DumpTimer" to="." method="_on_dump_timer_timeout"]

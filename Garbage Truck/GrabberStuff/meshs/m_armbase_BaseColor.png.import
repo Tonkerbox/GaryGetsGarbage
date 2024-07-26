@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5so3b1eld4j0"
-path.s3tc="res://.godot/imported/m_armbase_BaseColor.png-34c15dbce3482d38509194cdd8c49719.s3tc.ctex"
+path="res://.godot/imported/m_armbase_BaseColor.png-34c15dbce3482d38509194cdd8c49719.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Garbage Truck/GrabberStuff/meshs/m_armbase_BaseColor.png"
-dest_files=["res://.godot/imported/m_armbase_BaseColor.png-34c15dbce3482d38509194cdd8c49719.s3tc.ctex"]
+dest_files=["res://.godot/imported/m_armbase_BaseColor.png-34c15dbce3482d38509194cdd8c49719.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

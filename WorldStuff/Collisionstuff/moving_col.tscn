@@ -17,13 +17,13 @@ script = ExtResource("1_p5eg7")
 colSize = 64
 
 [node name="colBody" type="StaticBody3D" parent="."]
-collision_mask = 10
+collision_mask = 22
 
 [node name="col" type="CollisionShape3D" parent="colBody"]
 shape = SubResource("ConcavePolygonShape3D_i3g1l")
 
 [node name="colBody2" type="StaticBody3D" parent="."]
-collision_mask = 10
+collision_mask = 22
 
 [node name="col" type="CollisionShape3D" parent="colBody2"]
 shape = SubResource("ConcavePolygonShape3D_7dn5e")

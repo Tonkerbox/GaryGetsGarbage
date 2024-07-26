@@ -1,18 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbfw0wdlg6sqb"]
+[gd_scene load_steps=4 format=3 uid="uid://cbfw0wdlg6sqb"]
 
+[ext_resource type="Script" path="res://Props/Garbage/Food/cerealBox/cerealbox.gd" id="1_6tafp"]
 [ext_resource type="ArrayMesh" uid="uid://14bdmikpcitd" path="res://Props/Garbage/Food/cerealBox/cerealBox.res" id="1_hkq14"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nqcvk"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_53av8"]
 points = PackedVector3Array(0.15847, 0.730066, 0.593612, -0.264292, 0.730066, 0.593612, 0.15847, -0.730079, 0.593612, 0.15847, 0.730066, -0.593729, -0.264292, 0.730066, -0.593729, -0.264292, -0.730079, 0.593612, 0.15847, -0.730079, -0.593729, -0.264292, -0.730079, -0.593729)
 
-[node name="cerealbox" type="RigidBody3D"]
-collision_layer = 15
-collision_mask = 16
+[node name="cerealbox" type="RigidBody3D" groups=["trash"]]
+collision_layer = 16
+collision_mask = 31
+mass = 0.01
+script = ExtResource("1_6tafp")
+space = 1.0
+weight = 0.01
 
 [node name="CerealBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 mesh = ExtResource("1_hkq14")
 
-[node name="mainCol" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_nqcvk")
+[node name="Col" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_53av8")

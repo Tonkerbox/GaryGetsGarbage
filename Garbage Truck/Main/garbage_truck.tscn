@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://1mm30m7gehay"]
+[gd_scene load_steps=15 format=3 uid="uid://1mm30m7gehay"]
 
 [ext_resource type="Script" path="res://Garbage Truck/Main/GarbageTruck.gd" id="1_aws4y"]
 [ext_resource type="ArrayMesh" uid="uid://wl7evqmyw3fm" path="res://Garbage Truck/Meshs/cabMesh.res" id="2_f86m0"]
@@ -8,10 +8,8 @@
 [ext_resource type="Script" path="res://Garbage Truck/Main/CamPivot.gd" id="4_lfxow"]
 [ext_resource type="PackedScene" uid="uid://csi37e5uftwr7" path="res://Garbage Truck/Dumpsterstuff/dumpster.tscn" id="8_7fvko"]
 [ext_resource type="Script" path="res://Garbage Truck/Main/dumpsterJoint.gd" id="9_b4evp"]
-[ext_resource type="Script" path="res://Garbage Truck/GrabberStuff/GrabberAparatus.gd" id="10_1yna2"]
-[ext_resource type="ArrayMesh" uid="uid://vwuchkvqp7pd" path="res://Garbage Truck/GrabberStuff/meshs/arm.res" id="10_2o6au"]
 [ext_resource type="ArrayMesh" uid="uid://1ra1sugj48bi" path="res://Garbage Truck/GrabberStuff/meshs/grabberBase.res" id="10_a4y71"]
-[ext_resource type="ArrayMesh" uid="uid://ci25of4jld4ss" path="res://Garbage Truck/GrabberStuff/meshs/tongsMesh.res" id="11_of0jm"]
+[ext_resource type="PackedScene" uid="uid://cue0rbwuppd1j" path="res://Garbage Truck/GrabberStuff/arm.tscn" id="10_hg03u"]
 
 [sub_resource type="Curve" id="Curve_c4r48"]
 _data = [Vector2(0, 0.718321), 0.0, 0.0, 0, 0, Vector2(0.397572, 1), 0.0, 0.0, 0, 0, Vector2(0.746586, 0.64701), -2.12231, -2.12231, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -23,20 +21,13 @@ points = PackedVector3Array(1.86816, 2.97316, 0.98352, 1.86816, 2.97066, 1.01356
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lxe86"]
 points = PackedVector3Array(2.5119, -0.1402, -2.07565, 2.5119, -0.0416987, -2.08693, 2.20455, 0.472806, -1.79302, 2.22373, -0.00738919, -1.79302, 2.19029, -0.0295243, -1.79302, 2.15095, -0.0372717, -1.79302, -2.5119, -0.1402, -2.07565, 2.5119, -0.492426, -3.83915, 2.5119, 0.132062, -2.15953, 2.18143, 0.523579, -1.79302, 2.5119, 0.289914, -2.26878, -2.15144, -0.0372717, -1.79302, -2.19078, -0.0295243, -1.79302, -2.22422, -0.00738919, -1.79302, -2.20504, 0.472806, -1.79302, -2.5119, -0.0416987, -2.08693, -2.5119, -0.492426, -3.83915, 2.46223, -0.868586, -8.80471, 2.5119, -0.492426, -8.76101, 2.12636, 0.544607, -1.79302, 2.5119, 0.411796, -2.4034, 2.5119, 0.486087, -2.57609, 2.5119, 0.514448, -2.72622, -2.18193, 0.523579, -1.79302, -2.5119, 0.289914, -2.26878, -2.5119, 0.132062, -2.15953, -2.5119, -0.492426, -8.76101, -2.46272, -0.868586, -8.80471, 2.46223, -0.868586, -8.84207, 2.46223, -0.351038, -8.95836, 2.46223, -0.0372717, -8.95836, 2.5119, -0.214076, -8.74198, -2.12685, 0.544607, -1.79302, 2.5119, 0.515416, -2.99758, 2.5119, 0.515416, -8.059, 1.32627, 0.544607, -8.62568, -2.5119, 0.514448, -2.72622, -2.5119, 0.486087, -2.57609, -2.5119, 0.411796, -2.4034, -2.5119, -0.214076, -8.74198, -2.46272, -0.0372717, -8.95836, -2.46272, -0.351038, -8.95836, -2.46272, -0.868586, -8.84207, 1.31348, -0.571421, -8.99361, 1.32922, -0.567133, -8.99361, 2.31372, -0.270106, -8.97246, 2.33634, -0.215875, -8.97246, 2.33634, -0.155557, -8.97246, 2.31372, -0.101325, -8.97246, 2.25962, -0.0789135, -8.97246, 1.31348, -0.0636955, -8.99361, 1.32529, 0.230149, -8.9196, 1.32529, 0.321457, -8.89352, 1.32578, 0.406262, -8.85123, 1.32578, 0.444722, -8.82586, 1.32578, 0.491482, -8.78075, 2.5119, 0.341932, -8.5115, 2.5119, 0.258371, -8.58128, 2.5119, 0.122793, -8.6574, 2.5119, 0.00879717, -8.69899, 2.5119, -0.106306, -8.72647, -2.5119, 0.515416, -2.99758, -1.32676, 0.544607, -8.62568, -2.5119, 0.515416, -8.059, 2.5119, 0.513479, -8.18375, 1.32578, 0.525792, -8.72647, -2.5119, -0.106306, -8.72647, -2.5119, 0.00879717, -8.69899, -2.5119, 0.122793, -8.6574, -2.5119, 0.258371, -8.58128, -2.5119, 0.341932, -8.5115, -1.32627, 0.491482, -8.78075, -1.32627, 0.444722, -8.82586, -1.32627, 0.406262, -8.85123, -1.32578, 0.321457, -8.89352, -1.32578, 0.230149, -8.9196, -2.26012, -0.0789135, -8.97246, -2.31421, -0.101325, -8.97246, -2.33683, -0.155557, -8.97246, -2.33683, -0.215875, -8.97246, -2.31421, -0.270106, -8.97246, -2.26012, -0.292518, -8.97246, 0.225225, -0.571421, -8.99361, 1.34053, -0.55565, -8.99361, 1.34496, -0.540017, -8.99361, 1.34496, -0.0949615, -8.99361, 1.34053, -0.0793285, -8.99361, 1.32922, -0.0678459, -8.99361, 0.225225, -0.0636955, -8.99361, 2.5119, 0.41899, -8.41635, -1.32627, 0.525792, -8.72647, -2.5119, 0.513479, -8.18375, 2.5119, 0.481522, -8.30005, -2.5119, 0.41899, -8.41635, 0.209489, -0.0678459, -8.99361, 0.198178, -0.0793285, -8.99361, 0.194244, -0.0949615, -8.99361, 0.194244, -0.540017, -8.99361, 0.198178, -0.55565, -8.99361, 0.209489, -0.567133, -8.99361, -2.5119, 0.481522, -8.30005)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_muf3o"]
-resource_local_to_scene = true
-size = Vector3(0.31543, 0.0544128, 0.367073)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_c4478"]
-size = Vector3(0.31543, 0.0544128, 0.391365)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_hyx0k"]
-size = Vector3(3.3866, 0.199829, 0.624329)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l1uvf"]
+points = PackedVector3Array(-2.08959, -0.690448, -0.417, 1.95488, -0.825224, -0.417, 1.9422, -0.91524, 0.4037, -2.17637, -0.714239, 0.408732, 2.08959, -0.690448, -0.417, 2.03721, -0.85503, 0.408971, 2.02202, 0.657648, -0.417, -1.95488, -0.825224, -0.417, -1.94222, -0.915249, 0.403705, 2.17628, -0.714216, 0.408716, -2.02202, 0.657648, -0.417, -1.88731, -0.892695, -0.417, -1.68502, -0.960166, -0.417, 1.91392, 0.737, 0.39764, 2.11806, 0.694466, 0.411147, -2.03724, -0.85504, 0.408977, -1.88731, 0.725118, -0.417, 1.88731, -0.892695, -0.417, 1.78444, -0.975478, 0.399286, -2.11811, 0.694483, 0.411157, 1.88731, 0.725118, -0.417, -2.15716, -0.488201, -0.417, 2.27883, -0.509108, 0.414749, 2.15716, 0.522871, -0.417, -1.73601, -0.985663, 0.404175, -2.27893, -0.509124, 0.414767, -2.15716, 0.522871, -0.417, 2.15716, -0.488201, -0.417, 1.75259, -0.960166, -0.417, -1.91392, 0.737, 0.39764, 2.26461, 0.554769, 0.412083, -2.26466, 0.554784, 0.412093)
 
 [node name="GarbageTruck" type="RigidBody3D" node_paths=PackedStringArray("steeringWheels", "drivingWheels")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0231934, 0)
 collision_layer = 2
-collision_mask = 13
+collision_mask = 29
 mass = 25.0
 gravity_scale = 1.7
 center_of_mass_mode = 1
@@ -146,47 +137,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.0
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.918481, 1.47543)
 mesh = ExtResource("10_a4y71")
 
-[node name="arm" type="RigidBody3D" parent="." node_paths=PackedStringArray("armJoint")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04804, 1.57177)
-collision_layer = 2
-collision_mask = 41
-center_of_mass_mode = 1
-script = ExtResource("10_1yna2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.918481, 1.47543)
+shape = SubResource("ConvexPolygonShape3D_l1uvf")
+
+[node name="arm" parent="." node_paths=PackedStringArray("armJoint") instance=ExtResource("10_hg03u")]
 armJoint = NodePath("../ArmJoint")
-armSpeed = 1.0
-tongRestPos = Vector3(0, -0.969104, 2.17188)
-tongDeployPos = Vector3(0, -0.969104, 2.71951)
-tongDeploySpeed = 0.1
-
-[node name="ArmMesh" type="MeshInstance3D" parent="arm"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.968722, 1.63199)
-mesh = ExtResource("10_2o6au")
-skeleton = NodePath("../..")
-
-[node name="TongJoint" type="JoltGeneric6DOFJoint3D" parent="arm"]
-
-[node name="tongHandler" type="Area3D" parent="arm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.969104, 2.17188)
-collision_layer = 0
-collision_mask = 6
-monitorable = false
-
-[node name="TongsMesh" type="MeshInstance3D" parent="arm/tongHandler"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, -0.472817)
-mesh = ExtResource("11_of0jm")
-skeleton = NodePath("../../..")
-
-[node name="leftCol" type="CollisionShape3D" parent="arm/tongHandler"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.699934, -0.0580292, 0.049376)
-shape = SubResource("BoxShape3D_muf3o")
-
-[node name="rightCol" type="CollisionShape3D" parent="arm/tongHandler"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.058, 0.0594316)
-shape = SubResource("BoxShape3D_c4478")
-
-[node name="FrontCol" type="CollisionShape3D" parent="arm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00189209, -1.02435, 2.28585)
-shape = SubResource("BoxShape3D_hyx0k")
-
-[connection signal="body_entered" from="arm/tongHandler" to="arm" method="_on_tong_handler_body_entered"]
-[connection signal="body_exited" from="arm/tongHandler" to="arm" method="_on_tong_handler_body_exited"]

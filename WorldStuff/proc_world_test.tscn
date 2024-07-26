@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dv4abc3u84v4w"]
+[gd_scene load_steps=18 format=3 uid="uid://dv4abc3u84v4w"]
 
 [ext_resource type="Texture2D" uid="uid://dd215kxkj0hy3" path="res://WorldStuff/tex_baseSand.png" id="2_7qyph"]
 [ext_resource type="Script" path="res://WorldStuff/TerrainHandler.gd" id="2_e88kr"]
@@ -9,30 +9,20 @@
 [ext_resource type="Script" path="res://WorldStuff/PropHandler.gd" id="7_qk5f0"]
 [ext_resource type="PackedScene" uid="uid://cyulgxyrac8do" path="res://Props/Trees/deadTree/dead_tree_basic.tscn" id="8_grvlq"]
 [ext_resource type="PackedScene" uid="uid://bbjjgtl6tbkpu" path="res://Props/Trees/cactus/cactus.tscn" id="9_gkun3"]
-[ext_resource type="PackedScene" uid="uid://itl2v0mem7wn" path="res://Props/Garbage/Dumpster/dumpster_can.tscn" id="10_6s367"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_is7iy"]
-sun_angle_max = 202.22
-
-[sub_resource type="Sky" id="Sky_y0jvw"]
-sky_material = SubResource("ProceduralSkyMaterial_is7iy")
+[ext_resource type="PackedScene" uid="uid://cpo7jq7oaheas" path="res://Props/Buildings/Basic Smol/smol_building.tscn" id="10_3ujp1"]
 
 [sub_resource type="Environment" id="Environment_1bmr1"]
-background_mode = 2
-sky = SubResource("Sky_y0jvw")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 2.0
-reflected_light_source = 2
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
+background_mode = 1
+background_color = Color(0.782299, 0.925242, 1, 1)
+background_energy_multiplier = 0.5
+ambient_light_source = 2
+ambient_light_color = Color(0.951215, 0.991635, 1, 1)
+ambient_light_energy = 0.5
 ssil_radius = 4.64
-fog_light_color = Color(0.782193, 0.830302, 0.865124, 1)
+fog_enabled = true
+fog_light_color = Color(0.778085, 0.828017, 0.889541, 1)
 fog_sun_scatter = 1.0
-fog_density = 0.0067
-fog_sky_affect = 0.142
-volumetric_fog_enabled = true
+fog_density = 0.0125
 volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.879781, 0.977408, 1, 1)
 volumetric_fog_emission = Color(1, 0.936881, 0.810357, 1)
@@ -83,20 +73,24 @@ shader_parameter/secondMixNoise = SubResource("NoiseTexture2D_v2q22")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pryx0"]
 material = SubResource("ShaderMaterial_inumf")
-size = Vector2(2056, 2056)
-subdivide_width = 2055
-subdivide_depth = 2055
+size = Vector2(750, 750)
+subdivide_width = 749
+subdivide_depth = 749
 
 [node name="ProcWorldTest" type="Node3D"]
 
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
-light_color = Color(0.915977, 0.932707, 0.848452, 1)
-light_energy = 2.0
+light_color = Color(0.912438, 1, 0.992512, 1)
+light_energy = 0.1
+light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
 shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_blur = 2.278
 directional_shadow_mode = 0
-sky_mode = 2
+directional_shadow_fade_start = 0.55
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bmr1")
@@ -119,8 +113,7 @@ player = NodePath("../GarbageTruck")
 script = ExtResource("7_qk5f0")
 chunkSize = 250
 trees = Array[PackedScene]([ExtResource("8_grvlq"), ExtResource("9_gkun3")])
+buildings = Array[PackedScene]([ExtResource("10_3ujp1")])
 player = NodePath("../GarbageTruck")
 treeFreq = Vector2i(30, 40)
-
-[node name="DumpsterCan" parent="." instance=ExtResource("10_6s367")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.3758, 6.36553)
+buildFreq = Vector2i(1, 2)

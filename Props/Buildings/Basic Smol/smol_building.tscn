@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpo7jq7oaheas"]
+
+[ext_resource type="Script" path="res://Props/Buildings/Basic Smol/smol_building.gd" id="1_1l8h6"]
+[ext_resource type="ArrayMesh" uid="uid://df1hnxm303y6l" path="res://Props/Buildings/Basic Smol/Meshs and Tex/smolBuildingMesh.res" id="1_ihxud"]
+[ext_resource type="PackedScene" uid="uid://itl2v0mem7wn" path="res://Props/Garbage/Dumpster/dumpster_can.tscn" id="2_lo2gc"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sysgd"]
+points = PackedVector3Array(-4.2118, 7.32449, -4.2118, -4.06586, -0.125688, -4.06586, -4.2118, 7.32449, 4.2118, -4.2118, 7.63995, -4.2118, 4.2118, 7.32449, -4.2118, -4.06586, -0.125688, 4.06503, 4.06503, -0.125688, -4.06586, -4.2118, 7.63995, 4.2118, 4.2118, 7.32449, 4.2118, 4.2118, 7.63995, -4.2118, 4.06503, -0.125688, 4.06503, 4.2118, 7.63995, 4.2118)
+
+[node name="smolBuilding" type="StaticBody3D" groups=["building"]]
+script = ExtResource("1_1l8h6")
+trashCanScenes = Array[PackedScene]([ExtResource("2_lo2gc")])
+trashAmountRange = Vector2i(1, 2)
+trashRadMin = 10.0
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -2.06759, 0)
+mesh = ExtResource("1_ihxud")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -2.06759, 0)
+shape = SubResource("ConvexPolygonShape3D_sysgd")
