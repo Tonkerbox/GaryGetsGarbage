@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpsufg3pm4wi5"
 path.s3tc="res://.godot/imported/m_lid_Metallic.png-5833ec1e2881caf7778d284156da8e98.s3tc.ctex"
+path.etc2="res://.godot/imported/m_lid_Metallic.png-5833ec1e2881caf7778d284156da8e98.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Props/Garbage/Dumpster/meshsAndText/m_lid_Metallic.png"
-dest_files=["res://.godot/imported/m_lid_Metallic.png-5833ec1e2881caf7778d284156da8e98.s3tc.ctex"]
+dest_files=["res://.godot/imported/m_lid_Metallic.png-5833ec1e2881caf7778d284156da8e98.s3tc.ctex", "res://.godot/imported/m_lid_Metallic.png-5833ec1e2881caf7778d284156da8e98.etc2.ctex"]
 
 [params]
 

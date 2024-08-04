@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqa7025p1dv5a"
 path.s3tc="res://.godot/imported/m_cabBase_BaseColor.png-9993a1f4fca95521c875f84c49d5c271.s3tc.ctex"
+path.etc2="res://.godot/imported/m_cabBase_BaseColor.png-9993a1f4fca95521c875f84c49d5c271.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Garbage Truck/Meshs/textures (dont look)/CabTexMat/m_cabBase_BaseColor.png"
-dest_files=["res://.godot/imported/m_cabBase_BaseColor.png-9993a1f4fca95521c875f84c49d5c271.s3tc.ctex"]
+dest_files=["res://.godot/imported/m_cabBase_BaseColor.png-9993a1f4fca95521c875f84c49d5c271.s3tc.ctex", "res://.godot/imported/m_cabBase_BaseColor.png-9993a1f4fca95521c875f84c49d5c271.etc2.ctex"]
 
 [params]
 

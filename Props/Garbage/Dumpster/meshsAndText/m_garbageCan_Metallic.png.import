@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3qj3aw2tihwd"
 path.s3tc="res://.godot/imported/m_garbageCan_Metallic.png-4aeae6806ecd4f1bac51dc65a495ba0d.s3tc.ctex"
+path.etc2="res://.godot/imported/m_garbageCan_Metallic.png-4aeae6806ecd4f1bac51dc65a495ba0d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Props/Garbage/Dumpster/meshsAndText/m_garbageCan_Metallic.png"
-dest_files=["res://.godot/imported/m_garbageCan_Metallic.png-4aeae6806ecd4f1bac51dc65a495ba0d.s3tc.ctex"]
+dest_files=["res://.godot/imported/m_garbageCan_Metallic.png-4aeae6806ecd4f1bac51dc65a495ba0d.s3tc.ctex", "res://.godot/imported/m_garbageCan_Metallic.png-4aeae6806ecd4f1bac51dc65a495ba0d.etc2.ctex"]
 
 [params]
 
