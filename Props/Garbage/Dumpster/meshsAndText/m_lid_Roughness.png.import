@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://doyoe3k37dibq"
 path.s3tc="res://.godot/imported/m_lid_Roughness.png-0da7a397bad6ff593304cd23280d489a.s3tc.ctex"
+path.etc2="res://.godot/imported/m_lid_Roughness.png-0da7a397bad6ff593304cd23280d489a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Props/Garbage/Dumpster/meshsAndText/m_lid_Roughness.png"
-dest_files=["res://.godot/imported/m_lid_Roughness.png-0da7a397bad6ff593304cd23280d489a.s3tc.ctex"]
+dest_files=["res://.godot/imported/m_lid_Roughness.png-0da7a397bad6ff593304cd23280d489a.s3tc.ctex", "res://.godot/imported/m_lid_Roughness.png-0da7a397bad6ff593304cd23280d489a.etc2.ctex"]
 
 [params]
 

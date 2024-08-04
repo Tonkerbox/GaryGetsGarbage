@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bikcosh3h5dch"
 path.s3tc="res://.godot/imported/pankoImage.png-b8b2c13ff3d27123a8d7251cec645053.s3tc.ctex"
+path.etc2="res://.godot/imported/pankoImage.png-b8b2c13ff3d27123a8d7251cec645053.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Props/Garbage/Food/cerealBox/pankoImage.png"
-dest_files=["res://.godot/imported/pankoImage.png-b8b2c13ff3d27123a8d7251cec645053.s3tc.ctex"]
+dest_files=["res://.godot/imported/pankoImage.png-b8b2c13ff3d27123a8d7251cec645053.s3tc.ctex", "res://.godot/imported/pankoImage.png-b8b2c13ff3d27123a8d7251cec645053.etc2.ctex"]
 
 [params]
 
